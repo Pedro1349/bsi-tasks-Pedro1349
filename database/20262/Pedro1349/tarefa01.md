@@ -14,3 +14,19 @@
   desenvolvedores, esse problema pode ser recorrente já que o modelo de "Sistemas de Arquivos" não oferece proteção inata contra isso. Outro problema é que determinadas operações devem
   acontecer em conjunto e como é difícil de garantir isso em um "Sistemas de Arquivos", o risco de uma dessas ações quebrar o banco não é baixo. Por fim, é complicado de separar o nível de
   acesso de cada pessoa que usa o banco em um sistema de arquivo, então alguém não autorizado pode ver informações confidenciais. 
+
+  ## Q3. Explique as propriedades ACID: atomicidade, consistência, isolamento e durabilidade. Para cada propriedade, descreva um exemplo prático no contexto de uma transferência bancária e explique o que aconteceria se o SGBD não garantisse essa propriedade.
+  ### Resposta:
+  A atomicidade garante que um conjunto de operações seja tratado como algo único, ou seja, todas as operações do conjunto devem ser totalmente concluídas ou todas seram canceladas.Exemplo:
+  uma tranferência de dinheiro entre duas contas em um banco, caso não houvesse atomicidade e ocorresse um bug no sistema, o dinheiro poderia ser retirado de uma conta sem chegar à outra,
+  já que cada operação seria independente.
+  
+  A consistência exige que toda modificação resulte em um banco de dados com o estado válido, ou seja, que os dados permaneçam corretos e de acordo com as regras do banco. Exemplo:
+  caso um usuário queria retirar dinheiro da sua conta no banco, o saldo da conta deve diminuir pelo mesmo valor retirado, caso não houvesse consistência e ocorresse um bug no sistema,
+  o saldo da conta poderia subir ou nem mesmo ser modificado.
+  
+  O isolamento impede que transações simultâneas se interfiram entre si e cada uma seja concluída de forma independente. Exemplo: caso um usuário do sistema queira ver o seu saldo ao mesmo   tempo que recebe 500R$, o sistema deve mostrar o saldo original da conta, pois não houvesse isolamento e os 500R$ não fossem creditados devido a um bug, o sistema mostraria um saldo
+  incorreto ao usuário.
+  
+  Por fim, a durabilidade garante que um conjunto de operações confirmada permaneça registrada mesmo após falhas no sistema. Exemplo: uma transferência de R$ 500,00 é confirmada, a
+  alteração dos saldos deve permanecer registrada mesmo que o banco fique sem energia logo em seguida, sem a durabilidade, esse dinheiro transferido seria perdido.
