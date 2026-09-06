@@ -30,3 +30,17 @@
   
   Por fim, a durabilidade garante que um conjunto de operações confirmada permaneça registrada mesmo após falhas no sistema. Exemplo: uma transferência de R$ 500,00 é confirmada, a
   alteração dos saldos deve permanecer registrada mesmo que o banco fique sem energia logo em seguida, sem a durabilidade, esse dinheiro transferido seria perdido.
+
+  ## Q4. Para cada cenário abaixo, indique qual(is) propriedade(s) ACID está(ão) em jogo e justifique sua resposta: a) Queda de energia no meio de uma transferência deixou o valor debitado da conta de origem, mas não creditado na conta de destino. b) Dois atendentes debitam, ao mesmo tempo, o mesmo saldo de uma conta. c) O sistema confirma a operação, mas após reiniciar o servidor o dado foi perdido. d) Uma transferência que levaria o saldo abaixo do limite permitido é rejeitada pelo banco.
+  ### Resposta:
+  A - Atomicidade não foi respeitada, pois apenas uma das operações do conjunto foi concluída e ambas não foram canceladas. Além disso, a consistência também foi violada ja que o saldo da
+  conta de destino não foi creditado. Durabilidade foi respeitada, pois a operação que finalizou continou registrada. Por fim, não há indícios de que o isolamento não foi respeitado também.
+
+  B - Não teve isolamento, pois duas operações simultâneas interferiram no mesmo saldo. Em relação a atomicidade, consistência e durabilidade, não há indícios de que foram desrespeitadas.
+
+  C - A durabilidade foi desrespeitada, pois o dado foi perdido mesmo após a confirmação da operação. Em relação a atomicidade, consistência e isolamento, não há indícios de que foram
+  desrespeitadas.
+
+  D - A consistência foi respeitada, pois o banco rejeitou a transferência que deixaria o saldo abaixo do limite permitido, mantendo as regras do sistema. Em relação a atomicidade, 
+  durabilidade e isolamento, não há indícios de que foram desrespeitadas.
+
