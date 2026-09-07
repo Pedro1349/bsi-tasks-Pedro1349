@@ -44,3 +44,16 @@
   D - A consistência foi respeitada, pois o banco rejeitou a transferência que deixaria o saldo abaixo do limite permitido, mantendo as regras do sistema. Em relação a atomicidade, 
   durabilidade e isolamento, não há indícios de que foram desrespeitadas.
 
+  ## Q5. Um SGBD trata dos seguintes aspectos: recuperação, integridade, redundância e inconsistência. Explique cada um deles e descreva como o SGBD os gerencia.
+  ### Resposta:
+  A recuperação é o processo de restaurar os dados após falhas como quedas de energia ou bugs no sistema. Os SGBDs utilizam recursos como backups e logs para fazer a recuperação das 
+  informações.
+  
+  A integridade é o aspecto que diz que os dados devem seguir as regras definidas no banco. Para isso, os SGBDs utilizam restrições como chaves primárias, chaves estrangeiras e regras de   
+  validação.
+  
+  A redundância acontece quando os mesmos dados são registrados múltiplas vezes no banco de dados. Os SGBDs buscam reduzi-la por meio da normalização dos dados.
+  
+  Inconsistência acontece quando existem informações diferentes ou incorretas sobre o mesmo dado no banco de dados. Os SGBDs ajudam a evitá-la mantendo os dados atualizados e aplicando 
+  regras de integridade e controle das transações.
+
