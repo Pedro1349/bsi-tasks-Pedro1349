@@ -57,3 +57,56 @@
   Inconsistência acontece quando existem informações diferentes ou incorretas sobre o mesmo dado no banco de dados. Os SGBDs ajudam a evitá-la mantendo os dados atualizados e aplicando 
   regras de integridade e controle das transações.
 
+  ## Q6. Considere o cenário de uma empresa de desenvolvimento de software que atende outras empresas como clientes. A empresa organiza seu trabalho em squads (equipes) compostas por desenvolvedores, testadores, líder técnico, supervisor e gerente de produto. Cada squad resolve tarefas (issues) e planeja releases, testes e o cronograma de sprints (iterações) dos projetos de cada cliente. Sem utilizar SQL, elabore um mini-projeto conceitual do banco de dados dessa empresa, deixando claro: a) As principais entidades envolvidas (clientes, squads, membros, tarefas, projetos, sprints, releases). b) Os principais atributos de cada entidade. c) Os relacionamentos entre as entidades (com a cardinalidade). d) Em linguagem natural, as regras de integridade (restrições) que o banco de dados deveria garantir.
+  ### Resposta:
+  **A (principais entidades envolvidas)**: 
+  * Cliente
+  * Squad
+  * Funcionário
+  * Função
+  * Projeto
+  * Tarefa
+  * Teste
+  * Iteração
+  * Release
+
+  **B (principais atributos de cada entidade)**:
+  * Cliente: ID, nome, CNPJ, telefone, email
+  * Squad: ID, nome
+  * Funcionário: ID, nome, salário, telefone, email
+  * Função: ID, nome_função
+  * Projeto: ID, nome, descricao, status (ativo ou inativo), data_limite
+  * Tarefa: ID, título, descricao, data_limite, status (finalizada ou não)
+  * Teste: ID, número do teste, resultado (se passou ou não no teste), erros (opcional. Descreve os erros encontrados)
+  * Iteração: ID, versão_nome, status (finalizada ou não)
+  * Release: ID, versão_nome, data_limite, data_lancamento, status
+
+  **C (relacionamentos entre as entidades)**:
+  * Um cliente pode ter vários projetos
+  * Um projeto deve ter um cliente
+  * Um projeto pode possuir várias Releases
+  * Um projeto pode ter várias iterações
+  * Um projeto pode ter várias tarefas
+  * Um projeto deve ser desenvolvido por um squad
+  * Uma release pertence a um projeto.
+  * Uma release deve ter uma iteração
+  * Uma iteração pode ter uma release
+  * Uma iteração deve ser de um projeto
+  * Uma iteração deve ser produzida por um squad
+  * Uma iteração pode ser composta por várias tarefas
+  * Uma iteração pode ter vários testes
+  * Uma tarefa deve ser de um projeto
+  * Uma tarefa deve ser parte de uma iteração
+  * Uma tarefa deve ser feita por um squad
+  * Um squad pode desenvolver somente um projeto
+  * Um squad pode fazer várias tarefas
+  * Um squad pode criar várias iterações
+  * Um squad deve ter vários funcionários 
+  * Um funcionário deve ser de um squad
+  * Um funcionário deve ter uma função
+  * Uma função pode ser de vários funcionários
+
+  **D (regras de integridade do banco)**:
+  Um squad deve ter somente um funcionário com a função "líder", um com a função "supervisor" e um com a função "gerente de produto". Além disso, um funcionário só pode fazer parte de um 
+  squad. Ademais, um squad só pode trabalhar em uma iteração de um projeto ativo por vez. Se o cliente optar por cancelar o projeto ou todas as demandas do cliente forem alcançadas, o 
+  projeto concluído/cancelado deve ter o status de "inativo". Por fim, uma iteração só tenha o status "finalizada", se todas as tarefas relacionadas a ela forem concluídas.
