@@ -105,3 +105,83 @@ erDiagram
         string resultado
         date data_execucao
     }
+```
+
+## Q4. A partir do Diagrama ER da questão anterior, faça o mapeamento para o Modelo Relacional: liste as relações (tabelas), com seus atributos, e identifique as chaves primárias e as chaves estrangeiras de cada relação.
+### Resposta:
+
+* **Cliente** {
+    - int codigo_cliente PK
+    - string nome
+    - string email_contato
+  
+  }
+
+* **Squad** {
+    - int codigo_squad PK
+    - string nome
+  
+  }
+
+* **Papel** {
+    - int codigo_papel PK
+    - string nome
+  
+  }
+
+* **Funcionário** {
+    - int codigo_funcionario PK
+    - string nome
+    - string email_contato
+    - int codigo_papel FK
+    - int codigo_squad FK
+
+  }
+
+* **Projeto** {
+    - int codigo_projeto PK
+    - string nome
+    - string descricao
+    - string status
+    - int codigo_cliente FK
+
+  }
+
+* **Sprint** {
+    - int codigo_sprint PK
+    - string nome
+    - date data_inicio
+    - date data_fim
+    - string situacao
+
+  }
+
+* **Release** {
+    - int codigo_release PK
+    - string versao
+    - date data_planejada
+    - string situacao
+    - int codigo_squad FK
+  }
+
+* **Tarefa** {
+    - int codigo_tarefa PK
+    - string descricao
+    - string prioridade
+    - string situacao
+    - float estimativa_horas
+    - int codigo_projeto FK
+    - int codigo_release FK
+    - int codigo_sprint FK
+    - int codigo_squad FK
+
+  }
+
+* **Teste** {
+    - int codigo_teste PK
+    - string descricao
+    - date data_execucao
+    - string resultado
+    - int codigo_release FK
+ 
+  }
