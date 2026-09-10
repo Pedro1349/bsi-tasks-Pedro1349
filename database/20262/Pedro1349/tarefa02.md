@@ -29,3 +29,79 @@
       classe.
     - **Cardinalidade 1:N**: Na notação de Chen é representada por "1:N". Na Crow's Foot é representada por "1" no lado 1 e pelo o símbolo de “pé de corvo” no lado N. Na UML é representada
       como "1..*".
+
+## Q3. Construa um Diagrama ER para projetar a base de dados de uma empresa de desenvolvimento de software com outras empresas como clientes. A base de dados não deve conter redundância de dados. O modelo ER deve ser representado com um diagrama usando Mermaid.js. O modelo deve apresentar, ao menos, entidades, relacionamentos, atributos, identificadores e restrições de cardinalidade. O modelo deve ser feito no nível conceitual, sem incluir chaves estrangeiras. a) A empresa presta serviços de desenvolvimento de software para outras empresas (clientes). Cada cliente é identificado por um código, um nome e um e-mail de contato. b) Os funcionários da empresa trabalham em squads (equipes). Cada funcionário é identificado por um código, um nome e um e-mail, e possui um papel na equipe: desenvolvedor, testador, líder técnico, supervisor ou gerente de produto. c) Cada squad é formada por vários funcionários e resolve tarefas (issues). Uma tarefa tem código, descrição, prioridade, situação e uma estimativa em horas. As tarefas pertencem a projetos de um cliente. d) O trabalho é organizado em iterações (sprints). Uma squad planeja releases para seus clientes; uma release agrupa um conjunto de tarefas e passa por testes de validação.
+### Resposta:
+
+```mermaid
+
+erDiagram
+    CLIENTE ||--o{ PROJETO : possui
+    PROJETO ||--|{ TAREFA : contém
+    TAREFA }|--|| SPRINT : integrada
+    SPRINT }o--|| SQUAD : planejada
+    FUNCIONARIO }|--|| PAPEL : tem
+    SQUAD ||--|{ FUNCIONARIO : composto
+    SQUAD ||--o{ TAREFA : resolve
+    SQUAD ||--o{ RELEASE : produz
+    RELEASE ||--|{ TAREFA : contém
+    RELEASE ||--|{ TESTE : tem
+
+    CLIENTE {
+        int codigo_cliente PK
+        string nome
+        string email_contato
+    }
+
+    SQUAD {
+        int codigo_squad PK
+        string nome
+    }
+
+    FUNCIONARIO {
+        int codigo_funcionario PK
+        string nome
+        string email
+    }
+
+    PAPEL {
+        int codigo_papel PK
+        string nome
+    }
+
+    PROJETO {
+        int codigo_projeto PK
+        string nome
+        string descricao
+        string status
+    }
+
+    TAREFA {
+        int codigo_tarefa PK
+        string descricao
+        string prioridade
+        string situacao
+        decimal estimativa_horas
+    }
+
+    SPRINT {
+        int codigo_sprint PK
+        string nome
+        date data_inicio
+        date data_fim
+        string situacao
+    }
+
+    RELEASE {
+        int codigo_release PK
+        string versao
+        date data_planejada
+        string situacao
+    }
+
+    TESTE {
+        int codigo_teste PK
+        string descricao
+        string resultado
+        date data_execucao
+    }
