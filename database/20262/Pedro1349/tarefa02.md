@@ -185,3 +185,7 @@ erDiagram
     - int codigo_release FK
  
   }
+
+## Q5. Descreva, em linguagem natural, as restrições de integridade referencial que devem ser garantidas no esquema projetado (ex.: "uma tarefa só pode existir vinculada a um projeto de cliente existente", "toda squad deve possuir um líder técnico").
+### Resposta:
+Um funcionário deve fazer parte de apenas um squad e deve ter apenas um papel. Além disso, um projeto só pode existir se um cliente estiver vinculado a ele. Ademais, uma release deve ser trabalhada por apenas um squad. Adicionalmente, uma tarefa só pode existir se estiver relacionada a um projeto, uma release, um sprint e um squad. Um teste deve estar relacionado a uma release. Além disso, um squad deve ter somente um funcionário com a função "líder", um com a função "supervisor" e um com a função "gerente de produto". Ademais, uma sprint só pode ser trabalhada por um squad. Por fim, não deve ser possível excluir um projeto se uma tarefa ainda estiver ativa.
